@@ -1,0 +1,35 @@
+name: Clone GitLab Repo - Status Output
+on: [push, workflow_dispatch]
+
+jobs:
+  clone-ubuntu:
+    runs-on: ubuntu-latest
+    name: Clone and Verify on Ubuntu
+    steps:
+      - name: Clone GitLab repository
+        run: |
+          git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/zheka2304/innercore-1.16.git innercore-1.16
+
+      - name: Show git status
+        run: |
+          cd innercore-1.16
+          echo "=== Git Status on Ubuntu ==="
+          git status
+          echo "=== Git Status Detailed ==="
+          git status --verbose
+
+  clone-windows:
+    runs-on: windows-latest
+    name: Clone and Verify on Windows
+    steps:
+      - name: Clone GitLab repository
+        run: |
+          git clone https://oauth2:${{ secrets.GITLAB_TOKEN }}@gitlab.com/zheka2304/innercore-1.16.git innercore-1.16
+
+      - name: Show git status
+        run: |
+          cd innercore-1.16
+          Write-Host "=== Git Status on Windows ==="
+          git status
+          Write-Host "=== Git Status Detailed ==="
+          git status --verbose
